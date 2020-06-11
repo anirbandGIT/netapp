@@ -1,0 +1,32 @@
+<div class="container">
+  <h3>Course List</h3>
+  <mat-form-field>
+    <input type="text" matInput [formControl]="myControl">
+  </mat-form-field>
+   
+  <!-- <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let course  of filteredData | async" [value]="course.courseName">
+      {{course.courseName}}
+    </mat-option>
+  </mat-autocomplete> -->
+  <div matSort (matSortChange)="sortData($event)">
+    <div mat-sort-header="courseName">A to Z</div>
+    <div class="row"> 
+      <div class="col-md-3" *ngFor="let course of courseList">
+        <mat-card>
+          <img mat-card-image src = "{{course.courseUrl}}" alt = "{{course.courseUrl}}">
+          <mat-card-title>{{course.courseName}}</mat-card-title>
+          <mat-card-content>
+         {{course.courseDesc}}
+        </mat-card-content>
+        <!-- <mat-icon class="mat-icon-rtl-mirror" svgIcon="star"></mat-icon> -->
+        </mat-card>
+      </div>
+    </div>
+    <mat-paginator [length]="oldData?.length"
+               [pageSize]="5"
+               (page)="setData($event)">
+</mat-paginator>
+    
+  </div>
+</div>
